@@ -6,6 +6,17 @@ docker pull nginx
 ```
 
 
+### Dockerfile 
+```
+# sudo docker build -t="my_nginx:0.0.1" .
+FROM nginx
+MAINTAINER bochen shih "fr407041@gmail.com"
+
+RUN groupadd -g 996 vboxsf \
+&& usermod -a -G vboxsf nginx 
+```
+
+
 ### Docker Run Command
 ```
 docker run -d \
@@ -17,17 +28,6 @@ docker run -d \
 -v /media/sf_docker/image/nginx/nginx_setting/nginx.conf:/etc/nginx/nginx.conf:ro \
 -v /media/sf_docker/image/nginx/log:/var/log/nginx \
 my_nginx:0.0.1
-```
-
-
-### Dockerfile 
-```
-# sudo docker build -t="my_nginx:0.0.1" .
-FROM nginx
-MAINTAINER bochen shih "fr407041@gmail.com"
-
-RUN groupadd -g 996 vboxsf \
-&& usermod -a -G vboxsf nginx 
 ```
 >
 > By below command, you can see the inner setting of container
