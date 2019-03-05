@@ -5,6 +5,7 @@
 docker pull nginx
 ```
 
+
 ### Docker Run Command
 ```
 docker run -d \
@@ -17,6 +18,7 @@ docker run -d \
 -v /media/sf_docker/image/nginx/log:/var/log/nginx \
 my_nginx:0.0.1
 ```
+
 
 ### Dockerfile 
 ```
@@ -33,6 +35,7 @@ RUN groupadd -g 996 vboxsf \
 > `docker exec -it nginx bash`
 >
 
+
 ### Nginx log setting and location
 >
 > log location at container : `/var/log/nginx/access.log` & `/var/log/nginx/error.log`
@@ -47,29 +50,41 @@ if ($time_iso8601 ~ "^(\d{4})-(\d{2})-(\d{2})") {
 
 access_log   /var/log/nginx/$date-access.log debug;
 ```
+>
+> Below is my setting
+>
+![](/nginx/image/nginx_01.png)
+
 
 ### Revise Nginx log format
 >
-> Edit in `/etc/nginx/nginx.conf`
+> Add in `/etc/nginx/nginx.conf`
 >
 ```
 # Type 1
 log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
                   '$status $body_bytes_sent "$http_referer" '
                   '"$http_user_agent" "$http_x_forwarded_for"';
-# Type 2
+# Type 2 (separate by ",")
 log_format  main  '"$remote_addr" , "$remote_user" , "$time_local" , "$request" , "$status" , "$body_bytes_sent" , "$http_referer" , "$http_user_agent" , "$http_x_forwarded_for"';
 ```
+>
+> Below is my setting (Mine is Type 2)
+>
+![](/nginx/image/nginx_conf.png)
 
-### Nginx Command Explain
+
+### Revise default.conf 
 >
-> usr/share/nginx/html :網頁根目錄
+> Add in `/etc/nginx/conf.d/default.conf`
 >
-> vi /etc/yum.repos.d/nginx.repo
+```
+autoindex on;               # Enable Browse Index
+autoindex_exact_size off;   # Default : on  `size unit by bytes`， off `size unit by kB、MB、GB`
+autoindex_localtime on;     # Default : off `Revise Time is GMT`， on  `Revise Time is Server Location Time`。
+```
 >
-> autoindex on;  開啟瀏覽目錄
+> Below is my setting (Mine is Type 2)
 >
-> autoindex_exact_size off;   預設為 on 會顯示檔案大小單位為 bytes，off 單位為 kB、MB、GB
->
-> autoindex_localtime on;   預設為 off 顯示檔案修改時間為 GMT，on 則為 Server 地區時間。
->
+![](/nginx/image/nginx_default.png)
+
