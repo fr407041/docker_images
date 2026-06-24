@@ -1,0 +1,14 @@
+最新驗證摘要
+
+1. inspect / planning flow:
+- planner_parse_ok = true
+- 可將 scope 壓縮為小 job
+
+2. edit flow:
+- worker 可真正修改 tests/test_placeholder.py
+- 自動驗證命令: python3 -m pytest -q
+- pytest 結果: 1 passed
+
+3. 防呆機制:
+- 若 worker 自稱成功，但檔案 hash 未變，會被判為 FAILED
+- 若驗證命令失敗，也不算成功
