@@ -1,0 +1,6 @@
+model = "qwen3:4b"
+model_provider = "openai"
+openai_base_url = "http://host.docker.internal:11434/v1"
+
+# Use a dummy key for local OpenAI-compatible servers such as Ollama.
+# Export OPENAI_API_KEY=dummy-key before launching Codex.
