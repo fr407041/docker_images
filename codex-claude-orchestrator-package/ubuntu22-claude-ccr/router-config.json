@@ -1,0 +1,43 @@
+{
+  "APIKEY": "local-test-key",
+  "LOG": true,
+  "LOG_LEVEL": "debug",
+  "API_TIMEOUT_MS": 600000,
+  "NON_INTERACTIVE_MODE": true,
+  "transformers": [
+    {
+      "name": "strip-thinking",
+      "path": "/opt/claude-ccr/strip-thinking-transformer.js"
+    }
+  ],
+  "Providers": [
+    {
+      "name": "ollama",
+      "api_base_url": "http://host.docker.internal:11434/v1/chat/completions",
+      "api_key": "ollama",
+      "models": [
+        "qwen3:4b",
+        "qwen2.5-coder:3b",
+        "gemma3:4b"
+      ],
+      "transformer": {
+        "use": [
+          [
+            "maxtoken",
+            {
+              "max_tokens": 4096
+            }
+          ],
+          "strip-thinking"
+        ]
+      }
+    }
+  ],
+  "Router": {
+    "default": "ollama,qwen3:4b",
+    "background": "ollama,qwen3:4b",
+    "think": "ollama,qwen3:4b",
+    "longContext": "ollama,qwen3:4b",
+    "webSearch": "ollama,qwen3:4b"
+  }
+}
