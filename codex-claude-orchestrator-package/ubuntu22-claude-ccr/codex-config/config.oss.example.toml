@@ -1,0 +1,6 @@
+model = "qwen3:4b"
+oss_provider = "ollama"
+
+# This file is only for native Codex OSS mode.
+# In the shared-container + host.docker.internal topology, the verified path is
+# the OpenAI-compatible config in config.toml.example instead of this OSS mode.
