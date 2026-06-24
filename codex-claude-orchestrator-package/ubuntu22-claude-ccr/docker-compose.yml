@@ -1,0 +1,32 @@
+services:
+  codex-local:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: claude-ccr:ubuntu22
+    container_name: codex-local-llm
+    tty: true
+    stdin_open: true
+    working_dir: /workspace
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-dummy-key}
+      OPENAI_BASE_URL: ${OPENAI_BASE_URL:-http://host.docker.internal:11434/v1}
+      CODEX_WORKDIR: /workspace
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ../..:/workspace
+    command: ["/bin/bash"]
+
+  ollama-example:
+    image: ollama/ollama:latest
+    profiles: ["ollama-example"]
+    container_name: ollama-example
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    command: ["serve"]
+
+volumes:
+  ollama-data:
