@@ -1,0 +1,9 @@
+services:
+  claude-router-bundle-test:
+    build:
+      context: ../..
+      dockerfile: docker/claude-router-bundle-test/Dockerfile
+    image: claude-router-bundle-test:ubuntu22
+    stdin_open: true
+    tty: true
+    working_dir: /opt/codex-claude-server-playbook
