@@ -1,0 +1,14 @@
+orchestrator-claude/
+orchestrator-claude-limit-tests/
+benchmarks/
+results/
+jobs/
+processes/
+*.log
+*.raw.txt
+*.status.json
+*.before.json
+*.after.json
+*.test.txt
+__pycache__/
+*.pyc
